@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Cody Care Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #111318;
+      --slate:     #1e2535;
+      --mid:       #4a5568;
+      --muted:     #8a93a6;
+      --border:    #dde1ea;
+      --cream:     #f7f5f0;
+      --white:     #ffffff;
+      --gold:      #b8933f;
+      --gold-lt:   #d4aa5a;
+      --accent:    #2a5cde;
+      --accent-lt: #4a7aff;
+      --success:   #16a34a;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,252,245,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,147,63,0.18);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    .nav-logo-img { height: 62px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--mid);
+      text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--ink) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-lt) !important; }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--slate);
+      padding: 130px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 30%, rgba(42,92,222,0.16) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(184,147,63,0.10) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 700px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(184,147,63,0.15);
+      border: 1px solid rgba(184,147,63,0.3);
+      color: var(--gold-lt);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold-lt);
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .page-hero h1 em { color: var(--gold-lt); font-style: normal; }
+    .page-hero p {
+      font-size: 1.05rem; font-weight: 300;
+      color: rgba(255,255,255,0.62);
+      max-width: 520px; line-height: 1.75;
+    }
+
+    /* ── SHARED SECTION ── */
+    section { padding: 80px 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.65rem;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--mid);
+      max-width: 520px; line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PLATFORM SECTION ── */
+    .platform-section { background: var(--cream); }
+    .platform-tabs {
+      display: flex; gap: 0.75rem; margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; border: 2px solid var(--border);
+      background: var(--white); color: var(--mid);
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--slate);
+      border-color: var(--slate);
+      color: var(--white);
+    }
+    .tab-btn:hover:not(.active) { border-color: var(--muted); color: var(--ink); }
+    .tab-icon { font-size: 1.1rem; }
+
+    .tab-content { display: none; animation: fadeUp 0.35s ease both; }
+    .tab-content.active { display: block; }
+
+    /* ── SERVICE GRID ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .svc-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .svc-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+      border-color: var(--gold);
+    }
+    .svc-icon { font-size: 1.85rem; margin-bottom: 0.75rem; }
+    .svc-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .svc-card p { font-size: 0.875rem; color: var(--mid); line-height: 1.6; margin-bottom: 1rem; }
+    .svc-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .svc-bullets li {
+      font-size: 0.82rem; color: var(--mid);
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .svc-bullets li::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 0.75rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .tier-pill {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.2rem 0.65rem; border-radius: 4px;
+      margin-top: 0.85rem;
+    }
+    .tier-quick   { background: #dcfce7; color: #166534; }
+    .tier-build   { background: #dbeafe; color: #1e40af; }
+    .tier-ongoing { background: #fef3c7; color: #92400e; }
+
+    /* ── PLATFORM INTRO BLOCK ── */
+    .platform-intro {
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+    .platform-intro-icon { font-size: 2rem; flex-shrink: 0; }
+    .platform-intro h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .platform-intro p { font-size: 0.9rem; color: var(--mid); line-height: 1.65; }
+
+    /* ── APPROACH SECTION ── */
+    .approach-section { background: var(--white); }
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .approach-card {
+      border-top: 3px solid var(--gold);
+      padding-top: 1.25rem;
+    }
+    .approach-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 700;
+      color: var(--border); line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .approach-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .approach-card p { font-size: 0.875rem; color: var(--mid); line-height: 1.6; }
+
+    /* ── TECH STRIP ── */
+    .tech-strip {
+      background: var(--slate);
+      padding: 3rem 5%;
+      text-align: center;
+    }
+    .tech-strip p {
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.5rem;
+    }
+    .tech-pills {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+    }
+    .tech-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-size: 0.82rem; font-weight: 500;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--cream);
+      padding: 80px 5%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (max-width: 640px) { .cta-band { grid-template-columns: 1fr; } }
+    .cta-band h2 { margin-bottom: 0.5rem; }
+    .cta-band p { font-size: 1rem; color: var(--mid); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius); font-weight: 600;
+      font-size: 0.95rem; cursor: pointer;
+      text-decoration: none; border: none;
+      transition: all 0.2s; font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--gold); color: var(--ink); }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(184,147,63,0.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--slate);
+      padding: 3rem 5%;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 700; color: var(--white);
+    }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-lt); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="data:image/png;base64,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" alt="Cody Care Consulting" class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#how-it-works">How It Works</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#intake" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow">Full Service Catalog</div>
+    <h1>Everything we build,<br><em>built for your business.</em></h1>
+    <p>Whether you're on Google Workspace, Microsoft 365, or a mix of both — we automate the repetitive work so your team can focus on what actually matters.</p>
+  </div>
+</section>
+
+<!-- PLATFORM TABS -->
+<section class="platform-section" id="services">
+  <div class="section-label">Choose Your Platform</div>
+  <h2>Services by platform</h2>
+  <p class="section-sub">Select your environment below to see what we can build for you.</p>
+
+  <div class="platform-tabs">
+    <button class="tab-btn active" onclick="switchTab('gws', this)">
+      <span class="tab-icon">🔷</span> Google Workspace
+    </button>
+    <button class="tab-btn" onclick="switchTab('m365', this)">
+      <span class="tab-icon">🟦</span> Microsoft 365
+    </button>
+    <button class="tab-btn" onclick="switchTab('custom', this)">
+      <span class="tab-icon">⚡</span> Custom Dev
+    </button>
+  </div>
+
+  <!-- GOOGLE WORKSPACE TAB -->
+  <div class="tab-content active" id="tab-gws">
+    <div class="platform-intro">
+      <div class="platform-intro-icon">🔷</div>
+      <div>
+        <h3>Google Workspace</h3>
+        <p>From Gmail and Sheets to Drive and Docs — we use Google Apps Script and native Workspace tools to build automations that live entirely inside your existing environment. No new software licenses required.</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🏗️</div>
+        <h3>Tenant Setup &amp; Configuration</h3>
+        <p>Start your Workspace right, or tighten up what you already have. We handle admin console configuration, security hardening, and user provisioning.</p>
+        <ul class="svc-bullets">
+          <li>Admin console setup &amp; security defaults</li>
+          <li>User/group provisioning &amp; roles</li>
+          <li>MFA, login policies &amp; access controls</li>
+          <li>Shared drives &amp; folder architecture</li>
+          <li>Custom email routing &amp; aliases</li>
+        </ul>
+        <span class="tier-pill tier-ongoing">Ongoing / Setup</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📊</div>
+        <h3>Google Sheets Automation</h3>
+        <p>Turn your spreadsheets into automated business tools. We write Google Apps Script to add logic, triggers, and workflows that run without you touching anything.</p>
+        <ul class="svc-bullets">
+          <li>Auto-populate data from Forms or external sources</li>
+          <li>Custom formulas, dashboards &amp; summaries</li>
+          <li>Scheduled reports emailed automatically</li>
+          <li>Row-level triggers (edit, submit, time-based)</li>
+          <li>Multi-sheet cross-referencing &amp; sync</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📄</div>
+        <h3>Document Generation</h3>
+        <p>Auto-generate Docs, Slides, or PDFs from your Sheets data or form responses — proposals, invoices, SOPs, contracts, and more.</p>
+        <ul class="svc-bullets">
+          <li>Template-based Doc/Slide generation</li>
+          <li>Form → Doc pipelines</li>
+          <li>Auto PDF export &amp; email delivery</li>
+          <li>Invoice &amp; proposal generators</li>
+          <li>Batch document creation</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">✉️</div>
+        <h3>Gmail &amp; Calendar Automation</h3>
+        <p>Reduce inbox noise and manual scheduling. We build smart filters, auto-responders, and calendar workflows using Apps Script.</p>
+        <ul class="svc-bullets">
+          <li>Auto-label &amp; filter email rules</li>
+          <li>Templated reply drafts on triggers</li>
+          <li>Calendar event creation from Sheets/Forms</li>
+          <li>Automated follow-up reminders</li>
+          <li>Shared inbox management logic</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔗</div>
+        <h3>App Integrations</h3>
+        <p>Connect Google Workspace to your other tools via API. We handle the plumbing so data flows where it needs to go.</p>
+        <ul class="svc-bullets">
+          <li>Sheets ↔ CRM / project management sync</li>
+          <li>Webhook &amp; API integrations via Apps Script</li>
+          <li>Notion, Airtable, Slack, Zapier connections</li>
+          <li>Google Forms → third-party pipelines</li>
+          <li>Custom REST API calls</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🧰</div>
+        <h3>Custom Google Apps Script Tools</h3>
+        <p>Need something that doesn't exist out of the box? We build custom add-ons and sidebar tools that run inside your Workspace apps.</p>
+        <ul class="svc-bullets">
+          <li>Sheets sidebar tools &amp; custom menus</li>
+          <li>Google Forms data processing pipelines</li>
+          <li>Admin automation &amp; audit scripts</li>
+          <li>Bulk operations (email, doc creation, Drive)</li>
+          <li>Custom reporting &amp; data exports</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MICROSOFT 365 TAB -->
+  <div class="tab-content" id="tab-m365">
+    <div class="platform-intro">
+      <div class="platform-intro-icon">🟦</div>
+      <div>
+        <h3>Microsoft 365</h3>
+        <p>From Excel and SharePoint to Teams and Outlook — we build automations using native M365 tools, Power Platform, and custom scripts. Everything stays inside your existing Microsoft environment.</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🏗️</div>
+        <h3>Tenant Setup &amp; Configuration</h3>
+        <p>Get your M365 environment configured correctly from day one — or clean up what's grown organically over the years. Security, access, and licensing sorted.</p>
+        <ul class="svc-bullets">
+          <li>Admin center setup &amp; security policies</li>
+          <li>Conditional Access &amp; MFA configuration</li>
+          <li>User/group lifecycle &amp; license assignment</li>
+          <li>SharePoint site architecture</li>
+          <li>Exchange/Outlook routing &amp; policies</li>
+        </ul>
+        <span class="tier-pill tier-ongoing">Ongoing / Setup</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📊</div>
+        <h3>Excel Automation</h3>
+        <p>Excel is powerful — but manual Excel is slow. We write Office Scripts and VBA macros to automate your most repetitive spreadsheet work.</p>
+        <ul class="svc-bullets">
+          <li>Office Scripts for Excel Online automation</li>
+          <li>VBA macros for desktop Excel</li>
+          <li>Automated reporting &amp; pivot dashboards</li>
+          <li>Data cleaning &amp; transformation scripts</li>
+          <li>Scheduled workbook updates via Power Automate</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚡</div>
+        <h3>Power Automate Flows</h3>
+        <p>Build no-code/low-code workflows that connect your M365 apps and trigger on real events — form submissions, email arrivals, file changes, and more.</p>
+        <ul class="svc-bullets">
+          <li>Approval workflows (Teams, Outlook)</li>
+          <li>SharePoint list automations</li>
+          <li>Forms → Excel / SharePoint pipelines</li>
+          <li>Scheduled data sync flows</li>
+          <li>Email-triggered action chains</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📄</div>
+        <h3>Document Generation</h3>
+        <p>Auto-create Word documents, reports, and PDFs from your Excel or SharePoint data. Invoices, proposals, contracts — templated and auto-filled.</p>
+        <ul class="svc-bullets">
+          <li>Word template-based document generation</li>
+          <li>Excel → Word mail merge automation</li>
+          <li>SharePoint list → Document pipelines</li>
+          <li>Auto PDF export &amp; email delivery</li>
+          <li>Batch document creation scripts</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">💬</div>
+        <h3>Teams &amp; SharePoint Automation</h3>
+        <p>Use Teams and SharePoint as the hub of your workflow — not just a chat app and file dump. We build structured processes around your collaboration tools.</p>
+        <ul class="svc-bullets">
+          <li>Teams channel &amp; tab configuration</li>
+          <li>SharePoint list &amp; library automation</li>
+          <li>Teams notifications from other systems</li>
+          <li>Approval bots &amp; adaptive cards</li>
+          <li>Intranet &amp; knowledge base setup</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔗</div>
+        <h3>App Integrations</h3>
+        <p>Connect Microsoft 365 to the rest of your stack. We bridge your M365 tools with external apps using Power Automate, Graph API, and custom scripts.</li>
+        <ul class="svc-bullets">
+          <li>Microsoft Graph API integrations</li>
+          <li>CRM &amp; ERP data sync (Salesforce, HubSpot)</li>
+          <li>Webhook pipelines to external apps</li>
+          <li>Third-party connector setup</li>
+          <li>Cross-platform data flows</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM DEV TAB -->
+  <div class="tab-content" id="tab-custom">
+    <div class="platform-intro">
+      <div class="platform-intro-icon">⚡</div>
+      <div>
+        <h3>Custom Development</h3>
+        <p>When your workflow outgrows what native tools can handle, we build custom solutions — from lightweight web apps to full API integrations. All code is documented and handed off to you.</p>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🌐</div>
+        <h3>Custom Web Tools &amp; Portals</h3>
+        <p>Lightweight internal tools that your team actually uses. Form-to-database pipelines, admin dashboards, and client-facing portals built to spec.</p>
+        <ul class="svc-bullets">
+          <li>Internal admin dashboards</li>
+          <li>Client intake &amp; onboarding portals</li>
+          <li>Data entry forms with backend logic</li>
+          <li>Status &amp; reporting dashboards</li>
+          <li>Cloudflare Pages / GitHub Pages deployment</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔌</div>
+        <h3>API Integrations</h3>
+        <p>Most business tools have an API. We connect them together so your data flows automatically — no copy-paste, no manual exports.</p>
+        <ul class="svc-bullets">
+          <li>REST &amp; webhook integrations</li>
+          <li>OAuth authentication flows</li>
+          <li>Multi-app data sync pipelines</li>
+          <li>Scheduled batch operations</li>
+          <li>Error handling &amp; notification alerts</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📋</div>
+        <h3>SOP &amp; Knowledge Base Setup</h3>
+        <p>Your team needs clear documentation. We build structured SOP libraries in Notion, SharePoint, or Google Sites — organized, searchable, and easy to maintain.</p>
+        <ul class="svc-bullets">
+          <li>Notion workspace architecture</li>
+          <li>SOP templates &amp; naming conventions</li>
+          <li>SharePoint knowledge base setup</li>
+          <li>Google Sites intranet setup</li>
+          <li>Process documentation writing</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🐍</div>
+        <h3>Python Scripting &amp; Automation</h3>
+        <p>For automations that need to run outside of a browser or cloud platform — Python scripts that process files, move data, and integrate with APIs.</p>
+        <ul class="svc-bullets">
+          <li>File processing &amp; bulk operations</li>
+          <li>Excel/CSV transformation scripts</li>
+          <li>Email parsing &amp; routing automation</li>
+          <li>Scheduled cron-style jobs</li>
+          <li>API data extraction &amp; reporting</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🤖</div>
+        <h3>AI-Assisted Workflows</h3>
+        <p>Add practical AI features to your existing tools — email summarization, document classification, draft generation — using APIs like Claude or OpenAI.</p>
+        <ul class="svc-bullets">
+          <li>Gmail / Outlook email summarization</li>
+          <li>AI draft generation in Docs / Word</li>
+          <li>Document classification &amp; tagging</li>
+          <li>AI-assisted data extraction</li>
+          <li>Claude / OpenAI API integration</li>
+        </ul>
+        <span class="tier-pill tier-build">Build-Out</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔐</div>
+        <h3>Password &amp; Access Management</h3>
+        <p>Multi-location or high-turnover environments need structured credential management. We design and implement practical systems that scale with your team.</p>
+        <ul class="svc-bullets">
+          <li>Password manager setup (Bitwarden, 1Password)</li>
+          <li>Shared vault architecture for teams</li>
+          <li>Offboarding &amp; access revocation procedures</li>
+          <li>SSO &amp; MFA rollout planning</li>
+          <li>Least-privilege access audits</li>
+        </ul>
+        <span class="tier-pill tier-quick">Quick Win</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY APPROACH -->
+<section class="approach-section" id="approach">
+  <div class="section-label">How We Deliver</div>
+  <h2>No surprises. Just results.</h2>
+  <p class="section-sub">Every engagement follows the same clear process — so you always know what to expect.</p>
+  <div class="approach-grid">
+    <div class="approach-card">
+      <div class="approach-num">01</div>
+      <h3>Scoped, not open-ended</h3>
+      <p>Every project starts with a clear Statement of Work. You know exactly what's being built, the timeline, and the cost before a single line of code is written.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-num">02</div>
+      <h3>Least-privilege access</h3>
+      <p>We only request the permissions we need for the specific task. Your data stays yours. We document every access request upfront.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-num">03</div>
+      <h3>Documented handoff</h3>
+      <p>When we're done, you receive full documentation and a walkthrough. You own the code, the credentials, and the system — not us.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-num">04</div>
+      <h3>No new software required</h3>
+      <p>We build inside the tools you already pay for. If we need to recommend a new tool, we explain why and what it costs before proceeding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STRIP -->
+<div class="tech-strip">
+  <p>Technologies &amp; tools we work with</p>
+  <div class="tech-pills">
+    <span class="tech-pill">Google Apps Script</span>
+    <span class="tech-pill">Office Scripts</span>
+    <span class="tech-pill">Power Automate</span>
+    <span class="tech-pill">Microsoft Graph API</span>
+    <span class="tech-pill">Python</span>
+    <span class="tech-pill">JavaScript</span>
+    <span class="tech-pill">REST APIs</span>
+    <span class="tech-pill">Notion</span>
+    <span class="tech-pill">Bitwarden</span>
+    <span class="tech-pill">Cloudflare Pages</span>
+    <span class="tech-pill">Claude API</span>
+    <span class="tech-pill">Gmail API</span>
+    <span class="tech-pill">SharePoint</span>
+    <span class="tech-pill">Airtable</span>
+    <span class="tech-pill">Webhook / Zapier</span>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div>
+    <div class="section-label">Ready to automate?</div>
+    <h2>Tell us what you need built.</h2>
+    <p>Fill out our quick intake form — we'll follow up within one business day to scope your project.</p>
+  </div>
+  <a href="index.html#intake" class="btn btn-primary">Start Your Project →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Cody Care <span>Consulting</span></div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="index.html#intake">Get Started</a>
+  </div>
+  <p>© 2025 Cody Care Consulting. All rights reserved.</p>
+</footer>
+
+<script>
+  function switchTab(tabId, btn) {
+    // Hide all tab content
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    // Show selected
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
