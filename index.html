@@ -293,6 +293,51 @@
     }
     .success-state p { color: var(--mid); max-width: 440px; margin: 0 auto; }
 
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--cream); }
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem 2rem;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .testimonial-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .testimonial-quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.25rem; font-weight: 700;
+      color: var(--gold);
+      line-height: 1; opacity: 0.5;
+      margin-bottom: 0.25rem;
+    }
+    .testimonial-text {
+      font-size: 0.98rem; color: var(--slate);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-footer {
+      display: flex; align-items: center; gap: 0.75rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.1rem;
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--slate);
+      color: var(--gold-lt);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .testimonial-author { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+    .testimonial-source { font-size: 0.76rem; color: var(--muted); }
+    .testimonial-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 0.9rem; }
+
     /* ── FOOTER ── */
     footer {
       background: var(--slate);
@@ -392,6 +437,7 @@
   <ul class="nav-links">
   <li><a href="#how-it-works">How It Works</a></li>
   <li><a href="services.html">Services</a></li>
+  <li><a href="#testimonials">Testimonials</a></li>
   <li><a href="about.html">About</a></li>
   <li><a href="#intake" class="nav-cta">Get Started</a></li>
 </ul>
@@ -509,6 +555,39 @@
   </div>
   <div style="text-align:center; margin-top:1rem;">
     <a href="#intake" class="btn btn-primary" style="font-size:1rem;">Tell Us About Your Project →</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label">What Clients Say</div>
+  <h2>Trusted by small businesses and agencies alike</h2>
+  <p class="section-sub">A couple of words from people I've worked with on Upwork.</p>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote-mark">&ldquo;</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Cody easily understood the project, listened to what was needed, and delivered exceptional results. He shows he genuinely cares about helping, and it shows in his attitude. Pleasure working with you, Cody! I would highly recommend his services to anyone!!!!</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">B</div>
+        <div>
+          <div class="testimonial-author">BryMar Management</div>
+          <div class="testimonial-source">Upwork Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote-mark">&ldquo;</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Cody did a wonderful job informing my client regarding the best choices for their IT setup and Cloud Solutions. He was very professional and helpful, would highly recommend.</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">A</div>
+        <div>
+          <div class="testimonial-author">Ariam Digital</div>
+          <div class="testimonial-source">Upwork Client</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
